@@ -9,7 +9,7 @@ contract VotingTest is Test {
 
     function setUp() public {
         voting = new Voting();
-        voting.setPollInfo(0xD7EF90Eb0fF8D758BdFCC10ab7346Ff71FFecc6B , "Title", "This is a test", true);
+        voting.setPollInfo("Title", "This is a test", true);
     }
 
     function testPollInfo() public {
@@ -17,5 +17,4 @@ contract VotingTest is Test {
         assertEq(voting.getPollQuestion(), "This is a test");
         assertEq(voting.getPollStatus(), true);
     }
-    // function testPollEdit() public {}
 }

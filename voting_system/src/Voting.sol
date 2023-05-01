@@ -2,16 +2,24 @@
 pragma solidity >=0.8.2 <0.9.0;
 
 contract Voting {
+    address public owner;
+
+    constructor() {
+        owner = msg.sender;
+    }
     struct PollInfo {
-        address pollCreator;
         string title;
         string question;
         bool status;
     }
 
     PollInfo pollInfo;
-    function setPollInfo(address _pollCreator, string memory _title, string memory _question, bool _status) public {
-        pollInfo = PollInfo(_pollCreator, _title, _question, _status);
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Not owner");
+        _;
+    }
+    function setPollInfo(string memory _title, string memory _question, bool _status) public {
+        pollInfo = PollInfo(_title, _question, _status);
     }
     function getPollTitle() public view returns (string memory) {
         return(pollInfo.title);
