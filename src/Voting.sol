@@ -18,7 +18,7 @@ contract Voting {
         require(msg.sender == owner, "Not owner");
         _;
     }
-    function setPollInfo(string memory _title, string memory _question, bool _status) public {
+    function setPollInfo(string memory _title, string memory _question, bool _status) public onlyOwner {
         pollInfo = PollInfo(_title, _question, _status);
     }
     function getPollTitle() public view returns (string memory) {
